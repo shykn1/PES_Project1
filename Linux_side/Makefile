@@ -14,6 +14,7 @@ CFILES= pes1.c  parser.c
 SRCS= ${HFILES} ${CFILES}
 
 
+	
 all:	pes1
 
 clean:
@@ -27,7 +28,7 @@ pes1: pes1.o parser.o
 	$(CC) $(LDFLAGS) $(CFLAGS) -o $@ $^
 
 
-%.c:%.o
+%.o:%.c
 	$(CC) $(CFLAGS) -c $<
 
 .cpp.o:
