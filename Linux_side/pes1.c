@@ -55,9 +55,23 @@ void inital_message(){
 	printf("Press command starting with a \"C\": C0 means command 0 and C1 means command 1\r\n");
 	printf("Command 0: help; Command 1:exit\r\n");
 };
+
+void help_message(){
+	printf("Press command starting with a \"C\": C0 means command 0 and C1 means command 1\r\n");
+	printf("Command 0: help; Command 1:exit\r\n");
+};
 void evt_handler(){
-	//switch(output.)
-	;
+	switch(output.param1){
+		case 0:
+			help_message();
+			break;
+		case 1:
+			exit(0);
+			break;
+		default:
+			printf("Command Not defined\r\n");
+			break;
+	}
 }
 
 volatile char buffer[255];
@@ -83,6 +97,7 @@ int main(int argc, char *argv[])
 					break;
 				}
 				parser((char* )buffer,&output);
+				evt_handler();
 				buffer_ptr =0;
 				command_flag = 0;
 			}
