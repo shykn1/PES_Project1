@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-int8_t parser(char* input_command_string, struct param* output);
+//int8_t parser(char* input_command_string, struct param* output);
 int8_t command_check(uint32_t command);
-int8_t params_check(uint32_t params);
+//int8_t params_check(uint32_t params);
 
 struct param
 {
@@ -22,9 +22,14 @@ int8_t command_check(uint32_t  command)
     if(command < 192 || command > 197) return -1;
     return 0;
 }
-int8_t params_check(uint32_t  param)
+int8_t params_check(char* params_char)
 {
-    // not sure how to check
+    for(int i=0;params_char[i];i++)
+    {
+        char chara=params_char[i];
+        if(chara>102||(chara>70 && chara<97)||(chara>58 && chara<65)||chara<48) return -2;
+        if(i > 7 ) return -2;
+    }
     return 0;
 }
 int8_t parser(char* input_command_string, struct param* output)
@@ -40,15 +45,23 @@ int8_t parser(char* input_command_string, struct param* output)
     addr = &(output->param1);
     *addr = strtol(c, NULL, 16);
     ret = command_check(output->param1);
-    //if(ret != 0) return ret;
+    if(ret != 0) 
+    {
+        printf("error message: %d \n",ret);
+        return ret;
+    }
 	printf("command : %d check result : %d\n", output->param1,ret); 
 	
 //params get	
 	while((c = strtok(NULL, space))){  
+        ret = params_check(c);
         addr = &(output->param2)+count;
         *addr  = strtol(c, NULL, 16);
-        ret = params_check(*addr);
-        //if(ret != 0) return ret;
+        if(ret != 0) 
+        {
+            printf("error message: %d \n",ret);
+            return ret;
+        }
         printf("param %d check result : %d \n",count+2, ret);
         count ++;
     }	
@@ -63,10 +76,8 @@ int8_t parser(char* input_command_string, struct param* output)
 int main()
 {
     char *command_str;
-    char strcom[] = "C8 123f ffff 23b45aaaa asdfa  35256  \0";
+    char strcom[] = "C4 120f ffff 23b45aaa 35256\0";
     command_str = strcom;
     parser(command_str,&output);
     return 0;
 }
-
-
