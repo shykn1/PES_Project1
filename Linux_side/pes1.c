@@ -98,6 +98,7 @@ int main(int argc, char *argv[])
 				}
 				parser((char* )buffer,&output);
 				evt_handler();
+				cnt_charactor =0;
 				buffer_ptr =0;
 				command_flag = 0;
 			}
