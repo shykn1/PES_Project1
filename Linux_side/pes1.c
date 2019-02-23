@@ -84,6 +84,10 @@ int main(int argc, char *argv[])
 	char c =0;
 	int cnt_charactor =0;
 	buffer_ptr=0;
+	UINT32_t* test_buffer = malloc(0x100);UINT32_t* test_buffer1 = malloc(100);
+	UINT64_t addr = (UINT64_t)test_buffer;
+	printf("\n\r%p %p %p",test_buffer,test_buffer1,(UINT32_t* )	addr);
+	exit(0);
 	while(1){
 		while (!kbhit()) {   
 		/* main loop */
