@@ -10,7 +10,8 @@ LIBS= -lrt
 HFILES= 
 
 CFILES= pes1.c  parser.c
-OFILES= pes1.o  parser.o terminal.o
+#OFILES= pes1.o  parser.o terminal.o
+OFILES= pes1.o   terminal.o allocate.o
 SRCS= ${HFILES} ${CFILES}
 
 

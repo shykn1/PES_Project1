@@ -6,7 +6,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include <stdlib.h>
-
+#include "common.h"
 struct termios orig_termios;
 
 

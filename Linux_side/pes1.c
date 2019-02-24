@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <string.h>
+#include "common.h"
 #include "terminal.h"
 #include "parser.h"
+#include "allocate.h"
+
 
 
 void inital_message(){
@@ -15,20 +17,26 @@ void help_message(){
 	printf("Press command starting with a \"C\": C0 means command 0 and C1 means command 1\r\n");
 	printf("Command 0: help; Command 1:exit\r\n");
 };
-void evt_handler(INT8_t index){
+INT8_t evt_handler(INT8_t index){
+	INT8_t evt_trigger=1;
 	switch(index){
 		case 0:
 			help_message();
+			evt_trigger =0;
 			break;
 		case 1:
 			exit(0);
 			break;
-			
+		case 2:
+			evt_ptr = &allocate;
+			break;			
 		case -1:
 			printf("Command Not defined\r\n");
+			evt_trigger =0;
 			break;
 		default:
 			printf("Command Not defined\r\n");
+			evt_trigger =0;
 			break;
 	}
 }
@@ -36,6 +44,7 @@ void evt_handler(INT8_t index){
 volatile char buffer[255];
 volatile unsigned char buffer_ptr;
 volatile char command_flag = 0;
+
 int main(int argc, char *argv[])
 {
 	inital_message();
@@ -44,10 +53,7 @@ int main(int argc, char *argv[])
 	int cnt_charactor =0;
 	INT8_t command_index;
 	buffer_ptr=0;
-	/* UINT32_t* test_buffer = malloc(0x100);UINT32_t* test_buffer1 = malloc(100);
-	UINT64_t addr = (UINT64_t)test_buffer;
-	printf("\n\r%p %p %p",test_buffer,test_buffer1,(UINT32_t* )	addr);
-	exit(0); */
+	output.param1 =2;
 	while(1){
 		while (!kbhit()) {   
 		/* main loop */
@@ -60,8 +66,11 @@ int main(int argc, char *argv[])
 					memset((char *)buffer,0,255);
 					break;
 				}
-				command_index = parser((char* )buffer,&output);
-				evt_handler(command_index);
+				//command_index = parser((char* )buffer,&output);
+				
+				if(evt_handler(2))
+					evt_ptr(&output);
+				//exit(0);
 				cnt_charactor =0;
 				buffer_ptr =0;
 				command_flag = 0;
