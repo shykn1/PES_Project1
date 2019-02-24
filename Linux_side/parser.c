@@ -5,9 +5,9 @@
 //int8_t params_check(uint32_t params);
 
 
+
 INT8_t flag  = 0;
 INT8_t command_check(UINT64_t  command)
-
 {
     if(command < 192 || command > 197) return -1;
     return ((INT8_t)command - 192);
