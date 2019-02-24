@@ -67,7 +67,7 @@ INT8_t parser(char* input_command_string, struct param* output)
         return ret;
     }
 	//printf("command : %d check result : %d\n", output->param1,ret); 
-	
+	output->param1 = 0;
 //params get	
     while((c = strtok(NULL, space))){  
         ret = params_check(c);
