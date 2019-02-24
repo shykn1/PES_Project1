@@ -9,7 +9,8 @@
 INT8_t flag  = 0;
 INT8_t command_check(UINT64_t  command)
 {
-    if(command < 192 || command > 197) return -1;
+    //printf("command %ld\n",command);
+	if(command < 192 || command > 197) return -1;
     return ((INT8_t)command - 192);
 }
 INT8_t params_check(char* params_char)
@@ -61,10 +62,10 @@ INT8_t parser(char* input_command_string, struct param* output)
     addr = &(output->param1);
     *addr = strtol(c, NULL, 16);
     command = command_check(output->param1);
-    if(ret != 0) 
+    if(command != 0) 
     {
         //printf("error message: %d \n",ret);
-        return ret;
+        return command;
     }
 	//printf("command : %d check result : %d\n", output->param1,ret); 
 	output->param1 = 0;
@@ -73,7 +74,7 @@ INT8_t parser(char* input_command_string, struct param* output)
         ret = params_check(c);
         addr = &(output->param1)+count;
         *addr  = strtol(c, NULL, 16);
-        if(ret != 0) 
+        if(ret != 0) 	
         {
             if (ret == 1) 
 	    {
@@ -88,11 +89,11 @@ INT8_t parser(char* input_command_string, struct param* output)
         //printf("param %d check result : %d \n",count+2, ret);
         count ++;
     }	
-    printf("param 1 : %x \n", (output->param1));
-    printf("param 2 : %x \n", (output->param2));
-    printf("param 3 : %x \n", (output->param3));
-    printf("param 4 : %x \n", (output->param4));
-    printf("param 5 : %x \n", (output->param5));
+    printf("param 1 : %lx \n", (output->param1));
+    printf("param 2 : %lx \n", (output->param2));
+    printf("param 3 : %lx \n", (output->param3));
+    printf("param 4 : %lx \n", (output->param4));
+    printf("param 5 : %lx \n", (output->param5));
     return command;
 }
 
