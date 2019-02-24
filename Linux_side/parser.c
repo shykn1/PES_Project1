@@ -66,7 +66,6 @@ INT8_t parser(char* input_command_string, struct param* output)
         //printf("error message: %d \n",ret);
         return ret;
     }
-	output->param1 -= 192;
 	//printf("command : %d check result : %d\n", output->param1,ret); 
 	
 //params get	
