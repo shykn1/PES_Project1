@@ -20,7 +20,7 @@ struct param
 
 
 
-int8_t command_check(UINT64_t command);
+INT8_t command_check(INT8_t  command);
 int8_t params_check(char* params_char);
 int8_t parser(char* input_command_string, struct param* output);
 

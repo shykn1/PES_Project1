@@ -10,7 +10,7 @@ LIBS= -lrt
 HFILES= 
 
 CFILES= pes1.c  parser.c
-
+OFILES= pes1.o  parser.o terminal.o
 SRCS= ${HFILES} ${CFILES}
 
 
@@ -24,7 +24,8 @@ clean:
 distclean:
 	-rm -f *.o *.d
 
-pes1: pes1.o parser.o
+#pes1: pes1.o parser.o
+pes1: $(OFILES)
 	$(CC) $(LDFLAGS) $(CFLAGS) -o $@ $^
 
 

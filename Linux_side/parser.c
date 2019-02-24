@@ -6,7 +6,7 @@
 
 
 
-int8_t command_check(uint32_t  command)
+INT8_t command_check(INT8_t  command)
 {
     if(command < 192 || command > 197) return -1;
     return 0;
