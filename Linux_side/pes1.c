@@ -53,7 +53,6 @@ int main(int argc, char *argv[])
 	int cnt_charactor =0;
 	INT8_t command_index;
 	buffer_ptr=0;
-	output.param1 =2;
 	while(1){
 		while (!kbhit()) {   
 		/* main loop */
@@ -66,11 +65,10 @@ int main(int argc, char *argv[])
 					memset((char *)buffer,0,255);
 					break;
 				}
-				//command_index = parser((char* )buffer,&output);
+				command_index = parser((char* )buffer,&output);
 				
-				if(evt_handler(2))
+				if(evt_handler(command_index))
 					evt_ptr(&output);
-				//exit(0);
 				cnt_charactor =0;
 				buffer_ptr =0;
 				command_flag = 0;
