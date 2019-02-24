@@ -24,10 +24,11 @@ void allocate(param* param_input){
 	int i=0;
 	for(i=0;i<MAX_BLOCK;i++)	{
 		if(!mem[i].obsolete){
-			mem[i].mem_ptr = malloc(param_input->param1*sizeof(UINT32_t));
-			mem[i].range = param_input->param1;
+			uart_num=sprintf(uplink_buffer,"assigned bytes: %ld\n\r",(param_input->param1) *  (sizeof(UINT32_t)) );PRINTF;
+			mem[i].mem_ptr = malloc( (param_input->param1) *  (sizeof(UINT32_t)) );
+			mem[i].range = (UINT32_t)param_input->param1;
 			mem[i].obsolete =1;
-			uart_num=sprintf(uplink_buffer,"block %d has been allocated with size of %d; address: %p",i,mem[i].range,mem[i].mem_ptr );PRINTF;
+			uart_num=sprintf(uplink_buffer,"block %d has been allocated with size of 0x%x; address: %p \n\r",i,mem[i].range,mem[i].mem_ptr );PRINTF;
 			break;
 		}
 	}
