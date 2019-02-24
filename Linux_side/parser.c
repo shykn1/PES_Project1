@@ -62,7 +62,7 @@ INT8_t parser(char* input_command_string, struct param* output)
     addr = &(output->param1);
     *addr = strtol(c, NULL, 16);
     command = command_check(output->param1);
-    if(command != 0) 
+    if( (command == -1) || (command == 0) ) 
     {
         //printf("error message: %d \n",ret);
         return command;
@@ -88,7 +88,7 @@ INT8_t parser(char* input_command_string, struct param* output)
         }
         //printf("param %d check result : %d \n",count+2, ret);
         count ++;
-    }	
+    } 		
     printf("param 1 : %lx \n", (output->param1));
     printf("param 2 : %lx \n", (output->param2));
     printf("param 3 : %lx \n", (output->param3));

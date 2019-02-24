@@ -19,6 +19,7 @@ void help_message(){
 };
 INT8_t evt_handler(INT8_t index){
 	INT8_t evt_trigger=1;
+	evt_ptr =NULL;
 	switch(index){
 		case 0:
 			help_message();
@@ -39,6 +40,7 @@ INT8_t evt_handler(INT8_t index){
 			evt_trigger =0;
 			break;
 	}
+	return evt_trigger;
 }
 
 volatile char buffer[255];
@@ -67,7 +69,7 @@ int main(int argc, char *argv[])
 				}
 				command_index = parser((char* )buffer,&output);
 				
-				if(evt_handler(command_index))
+				if( (evt_handler(command_index)) != 0)
 					evt_ptr(&output);
 				cnt_charactor =0;
 				buffer_ptr =0;
