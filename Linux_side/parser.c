@@ -6,7 +6,11 @@
 
 
 
+<<<<<<< HEAD
 INT8_t command_check(UINT64_t  command)
+=======
+INT8_t command_check(INT8_t  command)
+>>>>>>> b6969e2f24c2642739f55eaada43dcdce885b792
 {
     if(command < 192 || command > 197) return -1;
     return ((INT8_t)command - 192);
