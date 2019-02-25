@@ -2,7 +2,6 @@
 *	@file 			pes1.c
 *	@brief 		A function to trigger specific event with the command index provided by parser.c
 *	
-*	@param 		command_index		The command index return from parser.c		
 *   - value = 0		Show the help message for all command			
 *   - value = 1		End the program
 *   - value = 2		Allocate a heap of memory into block		(more detail are in allocate.c)			
@@ -31,12 +30,33 @@
 void inital_message(){
 	printf("Press command starting with a \"C\": C0 means command 0 and C1 means command 1\r\n");
 	printf("Command 0: help; Command 1:exit\r\n");
+	printf("To find More detail, use help\r\n");
 };
 
+
+
 void help_message(){
-	printf("Press command starting with a \"C\": C0 means command 0 and C1 means command 1\r\n");
-	printf("Command 0: help; Command 1:exit\r\n");
-};
+	uart_num=sprintf(uplink_buffer,"Command 0: help; Command 1:exit\r\n");PRINTF;
+	uart_num=sprintf(uplink_buffer,"To allocate a block: C2 <N of words in Hex>\r\n");PRINTF;
+	uart_num=sprintf(uplink_buffer,"To free a block: C3 <index of the block>\r\n");PRINTF;
+	uart_num=sprintf(uplink_buffer,"To display a range of memory with block and offset: C4 <index of the block> <offset> <range in terms of words(4-byte)>\r\n");PRINTF;
+	uart_num=sprintf(uplink_buffer,"To display a range of memory with absolute address: C4 <addr> <range in terms of words(4-byte)> -a\r\n");PRINTF;
+	uart_num=sprintf(uplink_buffer,"To write an location with block and offset: C5 <index of the block> <offset> <data in HEX>\r\n");PRINTF;
+	uart_num=sprintf(uplink_buffer,"To write an location with absolute address: C5 <addr> <data in HEX> -a\r\n");PRINTF;
+	uart_num=sprintf(uplink_buffer,"To invert a range of memory with block and offset: C6 <index of the block> <offset> <range in terms of words(4-byte)>\r\n");PRINTF;
+	uart_num=sprintf(uplink_buffer,"To invert a range of memory with absolute address: C6 <addr> <range in terms of words(4-byte)> -a\r\n");PRINTF;
+	uart_num=sprintf(uplink_buffer,"Current blocks status:\r\n");PRINTF;
+	UINT8_t flag_displayed =0;
+	for(UINT8_t i=0;i<MAX_BLOCK;i++){
+		if(mem[i].obsolete == 1){
+			uart_num=sprintf(uplink_buffer,"block%d, capacity:0x%x words (0x%x bytes), address: %p\n\r",i,mem[i].range,mem[i].range*4,mem[i].mem_ptr);PRINTF;
+			flag_displayed=1;
+		}
+	}
+	if(flag_displayed==0){
+		uart_num=sprintf(uplink_buffer,"no block assigned\n\r");PRINTF;
+	}
+}
 INT8_t evt_handler(INT8_t index){
 	INT8_t evt_trigger=1;
 	evt_ptr =NULL;
@@ -103,6 +123,7 @@ int main(int argc, char *argv[])
 				//printf("error message: %d \n",command_index);
 				if( (evt_handler(command_index)) != 0)
 					evt_ptr(&output);
+				uart_num=sprintf(uplink_buffer,"\n\n\r");PRINTF;
 				cnt_charactor =0;
 				buffer_ptr =0;
 				command_flag = 0;

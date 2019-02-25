@@ -17,7 +17,7 @@ INT8_t flag  = 0;
 INT8_t command_check(UINT64_t  command)
 {
 	if(command < 192 || command > 201) return -1;
-	return ((INT8_t)command - 192);
+		return ((INT8_t)command - 192);
 }
 INT8_t params_check(char* params_char)
 {
@@ -44,8 +44,10 @@ INT8_t params_check(char* params_char)
 		}
 		else
 		{
-			if(!((chara =='x')||(chara>='A' && chara<='F')||(chara>='0' && chara<='9')|| (chara>='a' && chara<='f'))) ret = -2;
-			if(i > 18 ) ret = -2;
+			if(!((chara =='x')||(chara>='A' && chara<='F')||(chara>='0' && chara<='9')|| (chara>='a' && chara<='f'))) 
+				ret = -2;
+			if(i > 18 ) 
+				ret = -2;
 		}	
     }
     return ret;
