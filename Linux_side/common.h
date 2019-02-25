@@ -2,6 +2,13 @@
 #define __COMMON__
 
 #define MAX_BLOCK 100
+
+#define PRINTF  \
+for(int p=0;p<uart_num;p++){\
+	printf("%c",uplink_buffer[p]);\
+}
+
+
 typedef struct param param; 
 typedef unsigned long int UINT64_t;
 typedef unsigned int UINT32_t;
@@ -26,9 +33,6 @@ void (*evt_ptr)(param*);
 mem_array mem[MAX_BLOCK];
 UINT32_t uart_num;
 char uplink_buffer[255];
-#define PRINTF  \
-for(int p=0;p<uart_num;p++){\
-	printf("%c",uplink_buffer[p]);\
-}
+
 
 #endif

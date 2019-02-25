@@ -5,7 +5,7 @@
 #include "terminal.h"
 #include "parser.h"
 #include "allocate.h"
-
+#include "free_mem.h"
 
 
 void inital_message(){
@@ -30,7 +30,10 @@ INT8_t evt_handler(INT8_t index){
 			break;
 		case 2:
 			evt_ptr = &allocate;
-			break;			
+			break;		
+		case 3:
+			evt_ptr = &free_mem;
+			break;				
 		case -1:
 			printf("Command Not defined\r\n");
 			evt_trigger =0;
