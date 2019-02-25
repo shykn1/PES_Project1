@@ -13,10 +13,10 @@ INT8_t check_param_free(const param* param_input){
 			res=0;
 
 		if(res){
-			uart_num=sprintf(uplink_buffer,"valid parameters\n\r");PRINTF;}
-			
+			uart_num=sprintf(uplink_buffer,"valid parameters\n\r");PRINTF;}		
 		else{
 			uart_num=sprintf(uplink_buffer,"invalid parameters\n\r");PRINTF;}
+		return res;
 }
 void free_mem(param* param_input){
 	if(!check_param_free(param_input))

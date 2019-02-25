@@ -6,8 +6,9 @@
 #include "parser.h"
 #include "allocate.h"
 #include "free_mem.h"
-
-
+#include "display.h"
+#include "write_mem.h"
+#include "invert.h"
 void inital_message(){
 	printf("Press command starting with a \"C\": C0 means command 0 and C1 means command 1\r\n");
 	printf("Command 0: help; Command 1:exit\r\n");
@@ -33,7 +34,16 @@ INT8_t evt_handler(INT8_t index){
 			break;		
 		case 3:
 			evt_ptr = &free_mem;
-			break;				
+			break;	
+		case 4:
+			evt_ptr = &display;
+			break;	
+		case 5:
+			evt_ptr = &write_mem;
+			break;
+		case 6:
+			evt_ptr = &invert;
+			break;
 		case -1:
 			printf("Command Not defined\r\n");
 			evt_trigger =0;
@@ -71,7 +81,7 @@ int main(int argc, char *argv[])
 					break;
 				}
 				command_index = parser((char* )buffer,&output);
-				
+				//printf("error message: %d \n",command_index);
 				if( (evt_handler(command_index)) != 0)
 					evt_ptr(&output);
 				cnt_charactor =0;

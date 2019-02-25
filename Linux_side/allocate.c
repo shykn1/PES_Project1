@@ -1,7 +1,7 @@
 #include "allocate.h"
 INT8_t check_param_allocate(const param* param_input){
 		INT8_t res =1;
-		if(param_input->param1 > MAX_SIZE)
+		if( (param_input->param1 > MAX_SIZE) || (param_input->param1 ==0))
 			res=0;
 		if(param_input->param2 != 0)
 			res=0;
@@ -13,10 +13,10 @@ INT8_t check_param_allocate(const param* param_input){
 			res=0;
 
 		if(res){
-			uart_num=sprintf(uplink_buffer,"valid parameters\n\r");PRINTF;}
-			
+			uart_num=sprintf(uplink_buffer,"valid parameters\n\r");PRINTF;}			
 		else{
 			uart_num=sprintf(uplink_buffer,"invalid parameters\n\r");PRINTF;}
+		return res;
 }
 void allocate(param* param_input){
 	if(!check_param_allocate(param_input))
