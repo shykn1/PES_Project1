@@ -1,3 +1,13 @@
+/**
+*	@file 			common.h
+*	@brief 		Some common functions for this project
+*	
+*	@param  	
+*
+*	@author 		
+*	@date 			Feb 18 2019 
+*	@version  	1.0
+*/
 #ifndef  __COMMON__
 #define __COMMON__
 #include <time.h>
