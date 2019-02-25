@@ -1,3 +1,14 @@
+/**
+*	@file 			common.c
+*	@brief 		Some common functions for this project
+*	
+*	@param  	
+*
+*	@author 		
+*	@date 			Feb 18 2019 
+*	@version  	1.0
+*/
+
 #include "common.h"
 #include <stdlib.h>
 #include <stdio.h>

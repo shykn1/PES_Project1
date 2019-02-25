@@ -1,10 +1,17 @@
+/**
+*	@file 			parser.c
+*	@brief 		A parser to convert string command to command and parameters
+*	
+*	@param  	input_command_string		string command users input
+*	@param		output								struct buffer for command and parameters
+*	
+*	@author 		Tim Chien
+*	@date 			Feb 18 2019 
+*	@version  	1.0
+*/
+
 
 #include "parser.h"
-
-//int8_t parser(char* input_command_string, struct param* output);
-//int8_t params_check(uint32_t params);
-
-
 
 INT8_t flag  = 0;
 INT8_t command_check(UINT64_t  command)
@@ -15,6 +22,7 @@ INT8_t command_check(UINT64_t  command)
 INT8_t params_check(char* params_char)
 {
     INT8_t ret = 0;
+	//check the char unit in output->param<x> in order
     for(int i=0;params_char[i]!='\0';i++)
     {
 			char chara=params_char[i];
@@ -56,9 +64,8 @@ INT8_t parser(char* input_command_string, struct param* output)
 	INT8_t command = 0;
 	UINT64_t * addr;
 	flag  = 0;
-  //command get
+ //command get
     c = strtok(input_command_string, space);
-	
     addr = &(output->param1);
     *addr = strtol(c, NULL, 16);
     command = command_check(output->param1);

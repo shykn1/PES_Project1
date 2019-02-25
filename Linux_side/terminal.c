@@ -1,3 +1,14 @@
+/**
+*	@file 			terminal.c
+*	@brief 		
+*	
+*	@param  	
+*	
+*	@author 		
+*	@date 			Feb 18 2019 
+*	@version  	1.0
+*/
+
 #include "terminal.h"
 
 

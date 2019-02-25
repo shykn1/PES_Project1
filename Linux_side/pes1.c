@@ -1,3 +1,22 @@
+/**
+*	@file 			pes1.c
+*	@brief 		A function to trigger specific event with the command index provided by parser.c
+*	
+*	@param 		command_index		The command index return from parser.c		
+*   - value = 0		Show the help message for all command			
+*   - value = 1		End the program
+*   - value = 2		Allocate a heap of memory into block		(more detail are in allocate.c)			
+*   - value = 3		Free the block memory with block index 	(more detail are in free_mem.c)
+*   - value = 4		Display the data in specific address 		(more detail are in display.c)
+*   - value = 5		Write the data into specific address 		(more detail are in write_mem.c) 
+*   - value = 6		Invert the data in specific address			(more detail are in invert.c) 
+*	
+*	
+*	@author 		
+*	@date 			Feb 18 2019 
+*	@version  	1.0
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
