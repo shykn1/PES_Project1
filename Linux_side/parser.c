@@ -99,11 +99,11 @@ INT8_t parser(char* input_command_string, struct param* output)
         //printf("param %d check result : %d \n",count+2, ret);
         count ++;
     } 		
-    printf("param 1 : %lx \n", (output->param1));
+/*     printf("param 1 : %lx \n", (output->param1));
     printf("param 2 : %lx \n", (output->param2));
     printf("param 3 : %lx \n", (output->param3));
     printf("param 4 : %lx \n", (output->param4));
-    printf("param 5 : %lx \n", (output->param5));
+    printf("param 5 : %lx \n", (output->param5)); */
     return command;
 }
 

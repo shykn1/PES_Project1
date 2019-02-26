@@ -99,16 +99,17 @@ volatile char buffer[255];
 volatile unsigned char buffer_ptr;
 volatile char command_flag = 0;
 
-int main(int argc, char *argv[])
+//int main(int argc, char *argv[])
+int main()
 {
 	inital_message();
-    set_conio_terminal_mode();
+    //set_conio_terminal_mode();
 	char c =0;
 	int cnt_charactor =0;
 	INT8_t command_index;
-	buffer_ptr=0;
+	buffer_ptr=0;    int time=0;
 	while(1){
-		while (!kbhit()) {   
+		while (!kbhit() || command_flag) {   
 		/* main loop */
 			if(command_flag){
 				//printf("%s\r\n",buffer); 
@@ -128,9 +129,9 @@ int main(int argc, char *argv[])
 				buffer_ptr =0;
 				command_flag = 0;
 			}
-
 		}
 			/* consume the character(emulate the interrupt on the FRDM) */
+			
 			c = (char)getch();
 			if( (c=='\n')||(c=='\r')){
 				command_flag =1;	
@@ -138,6 +139,8 @@ int main(int argc, char *argv[])
 			}
 			else
 				cnt_charactor++;
+			
+			
 			buffer[buffer_ptr++] =c;
 
 	}

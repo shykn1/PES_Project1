@@ -82,3 +82,12 @@ int delta_t(struct timespec *stop, struct timespec *start, struct timespec *delt
 
   return(1);
 }
+
+INT8_t align_addr_check(UINT64_t addr){
+	if( (addr & ((UINT64_t) 0x3))!=0){
+		uart_num=sprintf(uplink_buffer,"address not aligned with word size\n\r");PRINTF;
+		return 0;
+	}
+	else
+		return 1;
+}

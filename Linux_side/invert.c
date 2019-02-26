@@ -64,6 +64,9 @@ void invert(param* param_input){
 		case 2:
 			addr=param_input->param1;
 			range =(UINT32_t)param_input->param2;
+			uart_num=sprintf(uplink_buffer,"According to the parameters, try to invert: address starting at %lx, range: 0x%x\n\r",addr,range);PRINTF;
+			if(!align_addr_check(addr))
+				break;			
 			if(check_addr(addr) && check_addr( addr+range*sizeof(UINT32_t)-1) ){
 				clock_gettime(CLOCK_REALTIME   , &start_time);
 				invert_data((UINT32_t*)addr,range);
@@ -80,6 +83,7 @@ void invert(param* param_input){
 			index=(UINT32_t)param_input->param1;
 			offset =(UINT32_t)param_input->param2;
 			range =(UINT32_t)param_input->param3;
+			uart_num=sprintf(uplink_buffer,"According to the parameters, try to invert: Block%d, offset starting at 0x%x, range: 0x%x\n\r",index,offset,range);PRINTF;
 			if(check_blk(index,offset) && check_blk( index,offset+range-1) ){
 				clock_gettime(CLOCK_REALTIME   , &start_time);
 				invert_data(mem[index].mem_ptr+offset,range);

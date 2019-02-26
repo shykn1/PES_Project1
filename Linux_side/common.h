@@ -45,5 +45,6 @@ char uplink_buffer[255];
 INT8_t check_addr(UINT64_t addr);
 INT8_t check_blk(UINT32_t blk_index, UINT32_t offset);
 void print_data(UINT32_t* base,UINT32_t range);
+INT8_t align_addr_check(UINT64_t addr);
 int delta_t(struct timespec *stop, struct timespec *start, struct timespec *delta_t);
 #endif

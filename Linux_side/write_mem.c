@@ -24,8 +24,10 @@ INT8_t check_param_write_mem(const param* param_input){
 		INT8_t res =3;
 		if(param_input->param3 == DASHA){
 			res =2;
-			if((param_input->param2 > MAX_U32) )
+			if((param_input->param2 > MAX_U32) ){
+				uart_num=sprintf(uplink_buffer,"data larger than 32-bit range\n\r");PRINTF;
 				res=0;
+			}
 			if(param_input->param4 != 0)
 				res=0;
 			if(param_input->param5 != 0)
@@ -37,8 +39,10 @@ INT8_t check_param_write_mem(const param* param_input){
 				res=0;
 			if(param_input->param2 > MAX_SIZE)
 				res=0;
-			if((param_input->param3 > MAX_U32))
+			if((param_input->param3 > MAX_U32)){
 				res=0;
+				uart_num=sprintf(uplink_buffer,"data larger than 32-bit range\n\r");PRINTF;
+			}	
 			if(param_input->param4 != 0)
 				res=0;
 			if(param_input->param5 != 0)
@@ -62,6 +66,9 @@ void write_mem(param* param_input){
 		case 2:
 			addr=param_input->param1;
 			data = (UINT32_t)param_input->param2;
+			uart_num=sprintf(uplink_buffer,"According to the parameters, try to write: address at %lx, data: 0x%x\n\r",addr,data);PRINTF;
+			if(!align_addr_check(addr))
+				break;
 			if(check_addr(addr) ){
 				*((UINT32_t*)addr) = data;
 				print_data((UINT32_t*)addr,1);
@@ -74,6 +81,7 @@ void write_mem(param* param_input){
 			index=(UINT32_t)param_input->param1;
 			offset =(UINT32_t)param_input->param2;
 			data =(UINT32_t)param_input->param3;
+			uart_num=sprintf(uplink_buffer,"According to the parameters, try to write: Block%d, offset at 0x%x, data: 0x%x\n\r",index,offset,data);PRINTF;
 			if(check_blk(index,offset)){
 				*((UINT32_t*)mem[index].mem_ptr+offset) = data;
 				print_data(mem[index].mem_ptr+offset,1);

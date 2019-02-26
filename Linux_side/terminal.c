@@ -34,6 +34,7 @@ void set_conio_terminal_mode()
 	new_termios.c_lflag  |= ECHO | ICANON | ECHOE;
 	new_termios.c_oflag  |= OPOST;
     tcsetattr(0, TCSANOW, &new_termios);
+
 }
 
 int kbhit()
@@ -42,18 +43,22 @@ int kbhit()
     fd_set fds;
 	char res=0;
     FD_ZERO(&fds);
-    FD_SET(0, &fds);
+    FD_SET(0 ,&fds);
+	//FD_SET(fileno(stdin),&fds);
     res = select(1, &fds, NULL, NULL, &tv);
 	return res;
 }
 
 int getch()
 {
+	//printf("%d\n\r",fd);
     int r;
     unsigned char c;
-    if ((r = read(0, &c, sizeof(c))) < 0) {
+    if ( (r = read(0, &c, sizeof(c))) < 0 ) {
         return r;
-    } else {
+    } 
+	else 
+	{
         return c;
     }
 }

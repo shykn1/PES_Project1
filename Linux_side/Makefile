@@ -35,3 +35,7 @@ pes1: $(OFILES)
 
 .cpp.o:
 	$(CC) $(CFLAGS) -c $<
+
+
+test: ./pes1 testscript
+	./pes1 < testscript

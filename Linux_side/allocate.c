@@ -39,6 +39,10 @@ void allocate(param* param_input){
 		if(!mem[i].obsolete){
 			uart_num=sprintf(uplink_buffer,"assigned bytes: %ld\n\r",(param_input->param1) *  (sizeof(UINT32_t)) );PRINTF;
 			mem[i].mem_ptr = malloc( (param_input->param1) *  (sizeof(UINT32_t)) );
+			if(mem[i].mem_ptr == NULL){
+				uart_num=sprintf(uplink_buffer,"block cannot be assigned with size: 0x%x\n\r",(UINT32_t)param_input->param1 );PRINTF;
+				break;
+			}
 			mem[i].range = (UINT32_t)param_input->param1;
 			mem[i].obsolete =1;
 			uart_num=sprintf(uplink_buffer,"block %d has been allocated with size of 0x%x; address: %p \n\r",i,mem[i].range,mem[i].mem_ptr );PRINTF;
