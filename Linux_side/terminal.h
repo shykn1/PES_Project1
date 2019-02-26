@@ -1,3 +1,14 @@
+/**
+*	@file 			terminal.h
+*	@brief 		
+*	
+*	@param  	
+*	
+*	@author 		
+*	@date 			Feb 18 2019 
+*	@version  	1.0
+*/
+
 #ifndef  __TERMINAL__
 #define __TERMINAL__
 #include <stdio.h>
