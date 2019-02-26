@@ -2,15 +2,20 @@
 *	@file 			free_mem.c
 *	@brief 		A function to free the memory in specific block provided by users
 *	
-*	@param 		param_input				buffer for parameters provided by users
-*   
-*	- param_input->param1			Index of the block
-*	
 *	@author 		
 *	@date 			Feb 24 2019 
 *	@version  	1.0
 */
 
+ /**
+*	@brief 		Check the parameters provided by users 
+*	
+*	@param 		param_input		buffer for parameters provided by users
+*
+*	@return 		res
+*	-value = 0		ERROR (invalid parameters)
+*	-value = 1		SUCCESS
+*/
 #include "free_mem.h"
 INT8_t check_param_free(const param* param_input){
 		INT8_t res =1;
@@ -31,6 +36,15 @@ INT8_t check_param_free(const param* param_input){
 			uart_num=sprintf(uplink_buffer,"invalid parameters\n\r");PRINTF;}
 		return res;
 }
+
+/**
+*	@brief 		Free the memory in specific block provided by users
+*	
+*	@param 		param_input		buffer for parameters provided by users
+*	- param_input->param1			Index of the block
+*
+*	@return void.
+*/
 void free_mem(param* param_input){
 	if(!check_param_free(param_input))
 		return;

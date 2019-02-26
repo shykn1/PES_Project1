@@ -2,9 +2,6 @@
 *	@file 			parser.c
 *	@brief 		A parser to convert string command to command and parameters
 *	
-*	@param  	input_command_string		string command users input
-*	@param		output								struct buffer for command and parameters
-*	
 *	@author 		Tim Chien
 *	@date 			Feb 18 2019 
 *	@version  	1.0
@@ -14,11 +11,31 @@
 #include "parser.h"
 
 INT8_t flag  = 0;
+
+/**
+*	@brief 		Check the command is valid or not
+*	
+*	@param 		command		parameter string
+*	
+*	@return 		ret
+*	-value = 0		SUCCESS (valid command)
+*	-value = -1		ERROR (command not found)
+*/
 INT8_t command_check(UINT64_t  command)
 {
 	if(command < 192 || command > 201) return -1;
 		return ((INT8_t)command - 192);
 }
+
+/**
+*	@brief 		Check the parameter is valid or not
+*	
+*	@param 		param_char	parameter string
+*
+*	@return 		ret
+*	-value = 0		SUCCESS (valid parameter)
+*	-value = -2		ERROR (invlid parameter)
+*/
 INT8_t params_check(char* params_char)
 {
     INT8_t ret = 0;
@@ -52,6 +69,16 @@ INT8_t params_check(char* params_char)
     }
     return ret;
 }
+
+/**
+*	@brief 		Convert string command to command and parameters
+*	
+*	@param  	input_command_string		string command users input
+*	@param		output								struct buffer for command and parameters
+*	
+*	@return 		void.
+*/
+
 INT8_t parser(char* input_command_string, struct param* output)
 {
 	output->param1 = 0;
