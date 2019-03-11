@@ -17,7 +17,10 @@
 #define NSEC_PER_SEC (1000000000)
 #define NSEC_PER_MSEC (1000000)
 #define NSEC_PER_MICROSEC (1000)
-
+#define modulus ((UINT64_t)2147483648)
+#define multiplier ((UINT64_t)1103515245)
+#define increment ((UINT64_t)12345)
+#define RANDOM_MAX ((UINT64_t)2147483648)
 
 #define PRINTF  \
 for(int p=0;p<uart_num;p++){\

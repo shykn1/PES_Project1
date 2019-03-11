@@ -18,6 +18,9 @@
 #include "display.h"
 #include "write_mem.h"
 #include "invert.h"
+#include "PRG.h"
+#include "pattern_check.h"
+
 
 /**
 *	@brief 		Printf the information for users while program starting
@@ -28,6 +31,7 @@ void inital_message(){
 	printf("Press command starting with a \"C\": C0 means command 0 and C1 means command 1\r\n");
 	printf("Command 0: help; Command 1:exit\r\n");
 	printf("To find More detail, use help\r\n");
+	
 };
 
 
@@ -99,6 +103,12 @@ INT8_t evt_handler(INT8_t index){
 			break;
 		case 6:
 			evt_ptr = &invert;
+			break;
+		case 7:
+			evt_ptr = &PRG;
+			break;
+		case 8:
+			evt_ptr = &pattern_check;
 			break;
 		case -1:
 			printf("Command Not defined\r\n");

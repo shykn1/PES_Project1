@@ -85,13 +85,11 @@ void write_mem(param* param_input){
 			uart_num=sprintf(uplink_buffer,"According to the parameters, try to write: address at %lx, data: 0x%x\n\r",addr,data);PRINTF;
 			if(!align_addr_check(addr))
 				break;
-			if(check_addr(addr) ){
-				*((UINT32_t*)addr) = data;
-				print_data((UINT32_t*)addr,1);
+			if(!(check_addr(addr) )){
+				uart_num=sprintf(uplink_buffer,"warning: address has not been allocated\n\r");PRINTF;
 			}				
-			else{
-				uart_num=sprintf(uplink_buffer,"address has not been allocated\n\r");PRINTF;
-			}
+			*((UINT32_t*)addr) = data;
+			print_data((UINT32_t*)addr,1);
 			break;
 		case 1:
 			index=(UINT32_t)param_input->param1;

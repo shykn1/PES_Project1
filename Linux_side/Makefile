@@ -11,7 +11,7 @@ HFILES=
 
 CFILES= pes1.c  parser.c
 #OFILES= pes1.o  parser.o terminal.o
-OFILES= pes1.o   terminal.o allocate.o parser.o free_mem.o display.o common.o write_mem.o invert.o
+OFILES= pes1.o   terminal.o allocate.o parser.o free_mem.o display.o common.o write_mem.o invert.o PRG.o pattern_check.o
 SRCS= ${HFILES} ${CFILES}
 
 

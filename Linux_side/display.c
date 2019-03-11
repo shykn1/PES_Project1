@@ -92,11 +92,9 @@ void display(param* param_input){
 			uart_num=sprintf(uplink_buffer,"According to the parameters, try to display: address starting at %lx, range: 0x%x\n\r",addr,range);PRINTF;
 			if(!align_addr_check(addr))
 				break;
-			if(check_addr(addr) && check_addr( addr+range*sizeof(UINT32_t)-1) )
-				print_data((UINT32_t*)addr,range);
-			else{
-				uart_num=sprintf(uplink_buffer,"address range has not been allocated\n\r");PRINTF;
-			}
+			if(!(check_addr(addr) && check_addr( addr+range*sizeof(UINT32_t)-1) )){
+				uart_num=sprintf(uplink_buffer,"warning: address range has not been allocated\n\r");PRINTF;}
+			print_data((UINT32_t*)addr,range);
 			break;
 		case 1:
 			index=(UINT32_t)param_input->param1;
