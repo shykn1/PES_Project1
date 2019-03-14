@@ -50,7 +50,11 @@ void help_message(){
 	uart_num=sprintf(uplink_buffer,"To write an location with absolute address: C5 <addr> <data in HEX> -a\r\n");PRINTF;
 	uart_num=sprintf(uplink_buffer,"To invert a range of memory with block and offset: C6 <index of the block> <offset> <range in terms of words(4-byte)>\r\n");PRINTF;
 	uart_num=sprintf(uplink_buffer,"To invert a range of memory with absolute address: C6 <addr> <range in terms of words(4-byte)> -a\r\n");PRINTF;
-	uart_num=sprintf(uplink_buffer,"Current blocks status:\r\n");PRINTF;
+	uart_num=sprintf(uplink_buffer,"To write data pattern with block and offset: C7 <index of the block> <offset> <range in terms of words(4-byte)> <seed>\r\n");PRINTF;
+	uart_num=sprintf(uplink_buffer,"To write data pattern with absolute address: C7 <addr> <range in terms of words(4-byte)> <seed> -a\r\n");PRINTF;
+	uart_num=sprintf(uplink_buffer,"To check data pattern with block and offset: C8 <index of the block> <offset> <range in terms of words(4-byte)> <seed>\r\n");PRINTF;
+	uart_num=sprintf(uplink_buffer,"To check data pattern with absolute address: C8 <addr> <range in terms of words(4-byte)> <seed> -a\r\n");PRINTF;	
+	uart_num=sprintf(uplink_buffer,"Current blocks status:\r\n");PRINTF;	
 	UINT8_t flag_displayed =0;
 	for(UINT8_t i=0;i<MAX_BLOCK;i++){
 		if(mem[i].obsolete == 1){
@@ -141,7 +145,7 @@ int main()
 	char c =0;
 	int cnt_charactor =0;
 	INT8_t command_index;
-	buffer_ptr=0;    int time=0;
+	buffer_ptr=0;   
 	while(1){
 		while (!kbhit() || command_flag) {   
 		/* main loop */

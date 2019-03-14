@@ -9,14 +9,14 @@ LIBS= -lrt
 
 HFILES= 
 
-CFILES= pes1.c  parser.c
-#OFILES= pes1.o  parser.o terminal.o
-OFILES= pes1.o   terminal.o allocate.o parser.o free_mem.o display.o common.o write_mem.o invert.o PRG.o pattern_check.o
+CFILES= 
+
+OFILES= check_heap.o
 SRCS= ${HFILES} ${CFILES}
 
 
 	
-all:	pes1
+all:	check_heap
 
 clean:
 	-rm -f *.o *.d 
@@ -25,8 +25,8 @@ clean:
 distclean:
 	-rm -f *.o *.d
 
-#pes1: pes1.o parser.o
-pes1: $(OFILES)
+
+check_heap: $(OFILES)
 	$(CC) $(LDFLAGS) $(CFLAGS) -o $@ $^
 
 
@@ -37,5 +37,4 @@ pes1: $(OFILES)
 	$(CC) $(CFLAGS) -c $<
 
 
-test: ./pes1 testscript
-	./pes1 < testscript
+
