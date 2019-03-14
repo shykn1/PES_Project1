@@ -35,6 +35,7 @@ INT8_t check_addr(UINT64_t addr){
 		//uart_num=sprintf(uplink_buffer,"address has not been allocated\n\r");PRINTF;
 		return 0;
 	}
+	return 0;
 }
 
 /**

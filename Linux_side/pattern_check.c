@@ -78,7 +78,7 @@ void pattern_check(param* param_input){
 	struct timespec start_time,end_time,delta_time;	
 	if(!cmd_type)
 		return;
-	int i=0;
+	
 	switch (cmd_type){
 		case 2:
 			addr=param_input->param1;

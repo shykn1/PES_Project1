@@ -77,7 +77,6 @@ void write_mem(param* param_input){
 	UINT32_t index,offset,data;
 	if(!cmd_type)
 		return;
-	int i=0;
 	switch (cmd_type){
 		case 2:
 			addr=param_input->param1;

@@ -84,7 +84,6 @@ void display(param* param_input){
 	UINT32_t range,index,offset;
 	if(!cmd_type)
 		return;
-	int i=0;
 	switch (cmd_type){
 		case 2:
 			addr=param_input->param1;
