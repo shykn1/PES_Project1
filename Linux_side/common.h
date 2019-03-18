@@ -48,8 +48,9 @@ struct param
 	UINT64_t param4;  
 	UINT64_t param5;
 }output;
+typedef void (*evt_ptr_type)(param*);
+evt_ptr_type evt_ptr;
 
-void (*evt_ptr)(param*);
 mem_array mem[MAX_BLOCK];
 UINT32_t uart_num;
 char uplink_buffer[255];
