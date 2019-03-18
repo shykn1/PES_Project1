@@ -40,7 +40,7 @@ void inital_message(){
 *	
 *	@return   	void.
 */
-void help_message(){
+void help_message(param* params_input){
 	uart_num=sprintf(uplink_buffer,"Command 0: help; Command 1:exit\r\n");PRINTF;
 	uart_num=sprintf(uplink_buffer,"To allocate a block: C2 <N of words in Hex>\r\n");PRINTF;
 	uart_num=sprintf(uplink_buffer,"To free a block: C3 <index of the block>\r\n");PRINTF;
@@ -67,6 +67,11 @@ void help_message(){
 	}
 }
 
+void exit_project(param* params_input){
+	exit(0);
+}
+	
+evt_ptr_type evt_regi[] ={&help_message,&exit_project,&allocate,&free_mem,&display,&write_mem,&invert,&PRG,&pattern_check};
 /**
 *	@brief 		Check event with the command index provided by parser.c
 *	
@@ -81,47 +86,14 @@ void help_message(){
 *	
 *	@return   	void.
 */
-
 INT8_t evt_handler(INT8_t index){
 	INT8_t evt_trigger=1;
 	evt_ptr =NULL;
-	switch(index){
-		case 0:
-			help_message();
-			evt_trigger =0;
-			break;
-		case 1:
-			exit(0);
-			break;
-		case 2:
-			evt_ptr = &allocate;
-			break;		
-		case 3:
-			evt_ptr = &free_mem;
-			break;	
-		case 4:
-			evt_ptr = &display;
-			break;	
-		case 5:
-			evt_ptr = &write_mem;
-			break;
-		case 6:
-			evt_ptr = &invert;
-			break;
-		case 7:
-			evt_ptr = &PRG;
-			break;
-		case 8:
-			evt_ptr = &pattern_check;
-			break;
-		case -1:
-			printf("Command Not defined\r\n");
-			evt_trigger =0;
-			break;
-		default:
-			printf("Command Not defined\r\n");
-			evt_trigger =0;
-			break;
+	if(index>=0 && index <=8)
+		evt_ptr=evt_regi[(UINT32_t)index];
+	else{
+		printf("Command Not defined\r\n");
+		evt_trigger =0;
 	}
 	return evt_trigger;
 }
